@@ -14,3 +14,9 @@ export interface commentType {
     image_id: number
 
 }
+
+export interface addCommentType {
+    name: string
+    description: string
+    image_id: number
+}
