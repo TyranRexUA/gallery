@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import { requestImages } from './store/imageReducer';
+import { RootState } from './store/store';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const dispatch = useDispatch()
+    let images = useSelector((state: RootState) => state.images.images)
+
+    useEffect(() => {
+        dispatch(requestImages())
+    }, [])
+
+    return (
+        <div className="App">
+            <h1>Test APP</h1>
+
+            <div>
+            {images.map(image => 
+                <img src={image.src} alt=""/>    
+            )}
+            </div>
+
+            <div>
+                <span>© 2018-2019</span>
+            </div>
+        </div>
+    );
 }
 
 export default App;
