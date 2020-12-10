@@ -4,6 +4,7 @@ import { changeIsOpenModuleWindow, requestImageAndComments } from '../../store/i
 import { requestImages } from '../../store/imageReducer';
 import { RootState } from '../../store/store';
 import AddCommentForm from '../AddCommentForm/AddCommentForm';
+import s from './ModuleWindow.module.scss'
 
 const ModuleWindow: React.FC = () => {
     const dispatch = useDispatch()
@@ -19,30 +20,42 @@ const ModuleWindow: React.FC = () => {
     }, [imageId])
 
     const closeModalWindow = () => {
+        document.body.classList.remove('lock')
         dispatch(changeIsOpenModuleWindow(false, null))
     }
 
     return (
-        <div>
-            <div>
+        <div className={s.ModuleLayer}>
+            <div className={s.ModuleWindow}>
                 {isLoading
-                    ? <div />
+                    ? <div className={s.preloader} />
 
                     : <>
-                        <div onClick={closeModalWindow}>X</div>
-                        <img src={imageSrc} alt="" />
-
-                        {comments.length > 0 && comments.map(comment =>
-                            <div key={comment.id}>
-                                <div>
-                                    {comment.name}
-                                </div>
-
-                                <div>
-                                    {comment.description}
-                                </div>
+                        <div className={s.ModuleWindow__closeBtn} onClick={closeModalWindow} />
+                        <div className={s.ModuleWindow__imgContainer}>
+                            <div className={s.ModuleWindow__img}>
+                                <img src={imageSrc} alt="" />
                             </div>
-                        )}
+                        </div>
+
+                        <div className={s.ModuleWindow__comments}>
+
+                            {comments.length > 0 && comments.map(comment =>
+                                <div className={s.comment} key={comment.id}>
+                                    {
+                                        // because API has not comment.date
+                                    }
+                                    <div className={s.comment__name}>
+                                        {comment.name}
+                                    </div>
+
+                                    <div className={s.comment__desc}>
+                                        {comment.description}
+                                    </div>
+                                </div>
+                            )}
+
+                        </div>
 
                         {imageId &&
                             <AddCommentForm image_id={imageId} />

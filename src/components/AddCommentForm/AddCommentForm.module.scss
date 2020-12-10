@@ -1,0 +1,53 @@
+.AddCommentForm {
+    width: 332px;
+    order: 2;
+
+    @media (max-width: 620px) {
+        width: 100%;
+        padding: 20px 22px;
+        order: 3;
+    }
+
+    &__field {
+        position: relative;
+        margin-bottom: 20px;
+
+        input {
+            width: 100%;
+            border: 1px solid #CCCCCC;
+            border-radius: 3px;
+            height: 30px;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 13px;
+            padding: 7px 11px;
+            outline: none;
+
+            ::placeholder {
+                color: #CCCCCC;
+            }
+        }
+    }
+
+    button {
+        height: 30px;
+        width: 100%;
+        outline: none;
+        border: none;
+        background: #4997D0;
+        border-radius: 3px;
+        color: white;
+
+        &:disabled {
+            background: #999999;
+        }
+    }
+}
+
+.error {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: red;
+    font-size: 10px;
+}

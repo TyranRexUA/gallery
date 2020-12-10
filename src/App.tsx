@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './App.css';
+import './App.scss';
 import ModuleWindow from './components/ModuleWindow/ModuleWindow';
 import { changeIsOpenModuleWindow } from './store/imageModuleWindow';
 import { requestImages } from './store/imageReducer';
@@ -17,6 +17,7 @@ const App = () => {
     }, [])
 
     const openModalWindow = (image_id: number) => {
+        document.body.classList.add('lock')
         dispatch(changeIsOpenModuleWindow(true, image_id))
     }
 
@@ -25,19 +26,19 @@ const App = () => {
             {ModuleWindowIsOpen &&
                 <ModuleWindow />
             }
-            <h1>Test APP</h1>
+            <h1 className='title'>Test APP</h1>
 
             {isLoading 
-                ? <div />
-                
-                : <div>
+                ? <div className='preloader'/>
+
+                : <div className='main'>
                     {images.map(image => 
                         <img key={image.image_id} src={image.src} alt="" onClick={() => openModalWindow(image.image_id)}/>    
                     )}
                 </div>
             }
 
-            <div>
+            <div className='footer'>
                 <span>© 2018-2019</span>
             </div>
         </div>

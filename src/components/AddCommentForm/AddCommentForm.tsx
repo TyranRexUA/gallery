@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { addComment } from '../../store/imageModuleWindow';
+import s from './AddCommentForm.module.scss'
 
 interface propsType {
     image_id: number
@@ -43,21 +44,25 @@ const AddCommentForm: React.FC<propsType> = ({image_id}) => {
     });
 
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <div>
-                <input type="text" name='name' value={formik.values.name} onChange={formik.handleChange}/>
+        <form className={s.AddCommentForm} onSubmit={formik.handleSubmit}>
+            <div className={s.AddCommentForm__field}>
+                <input type="text" name='name' value={formik.values.name} onChange={formik.handleChange} placeholder='Ваше имя'/>
+
                 {formik.errors.name && 
-                <div>
+                <div className={s.error}>
                     {formik.errors.name}
                 </div>}
+
             </div>
 
-            <div>
-                <input type="text" name='description' value={formik.values.description} onChange={formik.handleChange}/>
+            <div className={s.AddCommentForm__field}>
+                <input type="text" name='description' value={formik.values.description} onChange={formik.handleChange} placeholder='Ваш комментарий'/>
+                
                 {formik.errors.description && 
-                <div>
+                <div className={s.error}>
                     {formik.errors.description}
                 </div>}
+
             </div>
 
             <button disabled={isSubmitting} type="submit">
